@@ -321,14 +321,14 @@ def main(argv=None):
             if itr % 1 == 0:
                 train_loss = sess.run(loss, feed_dict = feed_dict)
                 print('KITTI Step: %d, Train_loss:%g'%(itr, train_loss))
-        #if itr % 100 == 0:
-        #    summary = sess.run(merged, feed_dict = feed_dict)
-        #    summary_writer.add_summary(summary, itr)
-        if itr % 5000 == 0:
-            print('Save Net Model...')
-            saver.save(sess, FLAGS.logs_dir + "model.ckpt", itr)
-        if itr % 5000 == 0 and itr >= 20000:
-            FLAGS.learning_rate = FLAGS.learning_rate / 2
+            #if itr % 100 == 0:
+            #    summary = sess.run(merged, feed_dict = feed_dict)
+            #    summary_writer.add_summary(summary, itr)
+            if itr % 5000 == 0:
+                print('Save Net Model...')
+                saver.save(sess, FLAGS.logs_dir + "model.ckpt", itr)
+            if itr % 5000 == 0 and itr >= 20000:
+                FLAGS.learning_rate = FLAGS.learning_rate / 2
 
     elif FLAGS.mode == "visualize":
         p = np.genfromtxt('../Dataset/on_road_test.txt', dtype='str')
