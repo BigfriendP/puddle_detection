@@ -7,6 +7,7 @@ from six.moves import urllib
 import tarfile
 import zipfile
 import scipy.io
+import cv2
 from tensorflow.compat.v1.nn import rnn_cell as rnn
 
 from tensorflow.python.ops import array_ops
@@ -24,7 +25,7 @@ def focal_loss(prediction_tensor, target_tensor, weights=None, alpha1=1, alpha2=
 def save_image(image, save_dir, name, mean=None):
     if mean:
         image = unprocess_image(image, mean)
-    misc.imsave(os.path.join(save_dir, name + ".png"), image)
+    cv2.imwrite(os.path.join(save_dir, name + ".png"), image*255.0)
 
 
 def get_variable(weights, name):
